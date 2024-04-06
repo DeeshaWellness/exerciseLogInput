@@ -1,14 +1,16 @@
 function submitExercise() {
     var exerciseInput = document.getElementById('exerciseInput').value;
     if (exerciseInput) {
-        // Assuming you have a cloud function URL
-        var cloudFunctionUrl = 'https://us-west3-work-out-sheet-with-shetty.cloudfunctions.net/workoutSheetUpdater';
-
-        // Check if the user is signed in
+        // Get the instance of the Google auth library
         var googleAuth = gapi.auth2.getAuthInstance();
+        
+        // Check if the user is signed in
         if (googleAuth.isSignedIn.get()) {
             // Get the ID token of the signed-in user
             var idToken = googleAuth.currentUser.get().getAuthResponse().id_token;
+            
+            // Cloud function URL
+            var cloudFunctionUrl = 'https://us-west3-work-out-sheet-with-shetty.cloudfunctions.net/workoutSheetUpdater';
 
             // Make the POST request with the exercise data and the ID token
             fetch(cloudFunctionUrl, {
@@ -21,7 +23,7 @@ function submitExercise() {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+                    throw new Error('Network response was not ok: ' + response.statusText);
                 }
                 return response.json();
             })
@@ -40,3 +42,4 @@ function submitExercise() {
         document.getElementById('responseMessage').innerText = 'Please enter an exercise.';
     }
 }
+
