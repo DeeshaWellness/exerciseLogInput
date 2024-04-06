@@ -8,10 +8,24 @@
 <body>
     <div class="container">
         <h1>Daily Exercise Log</h1>
+        <!-- Google Sign-In button -->
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+        
+        <!-- Input field -->
         <input type="text" id="exerciseInput" placeholder="e.g., Ran 4 miles" autofocus>
+        
+        <!-- Submission button -->
         <button onclick="submitExercise()">Submit</button>
+        
+        <!-- Response message -->
         <p id="responseMessage"></p>
     </div>
+
+    <!-- Google Platform Library -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
+    <!-- Custom script -->
     <script src="script.js"></script>
 </body>
+
 </html>
